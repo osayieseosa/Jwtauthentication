@@ -1,6 +1,6 @@
 # Authentication
 
-This folder contains the necessary components and logic for jwt authentication in the application. It includes a login form, a registration form, and a password reset form.
+This project contains the necessary components and logic for my login and registration form it contains custom validation, password reset, email verification and jwt authorization
 
 ## Components
 
@@ -28,7 +28,7 @@ The `useLogin` custom hook is responsible for handling the login process. It use
 
 ### useRegister
 
-The `useRegister` custom hook is responsible for handling the registration process. It uses the `useAuth` hook to access the authentication context and the `useHistory` hook to navigate to different pages.
+The `useRegister` custom hook is responsible for handling the registration process. It uses the `useState` for error handling and the `axios` for sending user data to the backend for account creation.
 
 ### usePasswordReset
 
