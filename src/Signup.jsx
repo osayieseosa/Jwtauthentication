@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useRegister from "./hooks/useRegister";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const {
@@ -11,13 +12,12 @@ const Signup = () => {
     errMsg,
     successMsg,
   } = useRegister();
-  
-  const [content, setContent] = useState("");
 
+  const [content, setContent] = useState("");
+  const [vissible, setVissible] = useState(false);
 
   useEffect(() => {
     if (errMsg) {
-
       setContent(
         <div className="bg-red-700 w-full text-center py-3 text-sm font-bold px-5">
           {errMsg}
@@ -72,21 +72,31 @@ const Signup = () => {
         <label htmlFor="password" className="sr-only">
           Password
         </label>
-        <input
-          id="password"
-          value={formData.password}
-          type="password"
-          name="password"
-          onChange={handleChange}
-          required
-          placeholder="Password"
-          className="px-5 py-3 rounded-sm border-2 border-neutral-500 outline-none text-neutral-700 placeholder:text-neutral-700"
-        />
+        <div className="w-full flex bg-white border-2 border-neutral-500 px-5">
+          <input
+            id="password"
+            value={formData.password}
+            type={vissible ? "text" : "password"}
+            name="password"
+            onChange={handleChange}
+            required
+            placeholder="Password"
+            className="py-3 rounded-sm outline-none text-neutral-700 placeholder:text-neutral-700 flex flex-grow"
+          />
+          <div
+            className="text-2xl flex place-items-center text-neutral-700"
+            onClick={() => setVissible((prevState) => !prevState)}
+          >
+            {vissible ? <FaEye /> : <FaEyeSlash />}
+          </div>
+        </div>
+
         <button
           type="submit"
+          disabled={isLoading ? true : false}
           className="bg-primary hover:bg-blue-700 py-3 rounded-sm font-semibold mt-5"
         >
-          Sign up
+          {isLoading ? "Loading..." : "Sign up"}
         </button>
       </form>
       <p className="text-md">

@@ -37,7 +37,7 @@ const useRegister = () => {
           setErrMsg("Enter valid Email Address")
         }else{
             
-          await axios.post('/register', JSON.stringify(formData),
+          await axios.post('/register',formData,
           {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,
@@ -59,6 +59,8 @@ const useRegister = () => {
         setErrMsg("Check Internet Connection");
       } else if (error.response?.status === 400) {
         setErrMsg("Please fill out all fields");
+      } else if (error.response?.status === 409) {
+        setErrMsg("Account already exists with this email");
       }else {
         setErrMsg("sign up Failed");
       }
